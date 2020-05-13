@@ -1,0 +1,39 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="User.master.cs" Inherits="GrandDetour.user.User" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="cphHead" runat="server">
+        <link rel="apple-touch-icon" href="../apple-touch-icon.png" /><link rel="shortcut icon" href="../favicon.ico" />
+    </asp:ContentPlaceHolder>
+</head>
+<body style="font-family: Aharoni,Arial Bold;" vlink="blue" link="blue" alink="blue">
+    <form id="form1" runat="server">
+        <table width="100%">
+            <tr>
+                <td><a href="home.aspx"><!--#include file="logo.inc"--></a></td>
+                <td><asp:Label runat="server" ID="lblLogout"><a href="logout.aspx">logout</a></asp:Label></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr color="red" width="100%"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <asp:Label runat="server" ID="lblWelcome"/> 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">          
+                    <center>
+                        <asp:ContentPlaceHolder ID="cphMain" runat="server"/>
+                    </center>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

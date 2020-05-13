@@ -1,0 +1,120 @@
+body
+{
+margin: 20px;
+background-color:#f6f6f6
+}
+
+
+body, p, h1, h2, h3, h4, h5, h6, table, td, th, ul, ol, textarea, input
+{
+font-family:sans-serif;
+color:#000000;
+}
+
+body.nav
+{
+margin-top:0px;
+margin-left:0px;
+margin-right:0px;
+margin-bottom:0px;
+background: #000066; 
+height:auto;
+width:auto;
+}
+
+body.head
+{
+margin-top:0px;
+margin-left:0px;
+margin-right:0px;
+margin-bottom:0px;
+background-color:#000066;
+height:auto;
+width:auto;
+}
+
+div {width:100%;}
+
+input.button {width:100px; height:28px;}
+input.ddk_button {width:150px; height:28px;}
+button {width:100px; height:28px;}
+
+
+h1 {font-size:160%; color:#003366;}
+h2 {font-size:140%; margin-top:5px; margin-bottom:5px;}
+h3 {font-size:120%;}
+h4 {font-weight:bold; color:#003366;}
+h5 {font-weight:bold; font-style:italic}
+h6 {font-style:italic; font-size:100%;}
+p {font-size:90%;}
+
+ul {font-size:90%; padding:3px;}
+ul.big {font-size:100%; padding:8px;}
+ol {font-size:90%; padding:3px;}
+li {font-size:100%; padding:3px;}
+
+p.sub {font-size:70%; padding:0px; margin-left:20px;}
+
+th {font-style:italic; font-weight:bold;}
+b {font-weight:bold;}
+
+pre
+{
+font-family:"Courier New",monospace;
+font-size:110%;
+margin-left:0;
+margin-bottom:0;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+background-color:transparent;
+}
+
+table 
+{
+	border:none;
+}
+
+td 
+{
+	padding:4px;
+	align:right;
+}
+
+td.header 
+{ 
+	z-index: -10; height: 45px;
+	align: center 
+}
+
+td.linktxt
+{	
+	color: #003366; 
+	text-decoration: underline; 
+	background-color: transparent;
+	font-weight: bold;
+	cursor: pointer;
+	cursor: hand;
+}
+
+td.linktxt:hover { color:#FF0000; text-decoration: none; background-color:transparent; font-weight:bold;}
+
+hr
+{
+background-color:transparent;
+color:#003366;
+height:2px;
+}
+
+a.nounderline{text-decoration:none}
+
+a:link    {color:#003366; text-decoration:underline; background-color:transparent; font-weight:bold;}
+a:visited {color:#003366; text-decoration:underline; background-color:transparent; font-weight:bold;}
+a:active  {color:#005599; text-decoration:underline; background-color:transparent; font-weight:bold;}
+a:hover   {color:#FF0000; text-decoration:underline; background-color:transparent; font-weight:bold;}
+
+a.nav:link    {font-size:110%; text-decoration:none; color:white; background-color:transparent; font-weight:normal;}
+a.nav:visited {font-size:110%; text-decoration:none; color:white; background-color:transparent; font-weight:normal;}
+a.nav:hover   {font-size:110%; text-decoration:none; color:yellow; background-color:transparent; font-weight:normal;}
+a.nav:active  {font-size:110%; text-decoration:none; color:#ffff77; background-color:transparent; font-weight:normal;}

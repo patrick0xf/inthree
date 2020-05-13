@@ -1,0 +1,167 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/style/pda.css"/>
+<title>Home Security</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="viewport" content="width=device-width,user-scalable=no"/>
+<script type="text/javascript">
+
+    var z = ".";
+    var ctrl = "node=<!--in2_getnode()-->&ctrl=<!--in2_getunit()-->";
+    var keys = [z,z,z,z,z,z,z,z,z];
+    var kt = setTimeout(function () { spaceKey(); }, 4000);
+    var dt;
+    var host = "http://" + document.location.host + "/pda";
+
+    function unhook(fname) {
+        if (fname) clearTimeout(fname);
+    }
+    
+    function hook(fname, time) {
+        return setTimeout(function () { fname(); }, time);
+    }
+
+    function spaceKey() {
+        unhook(kt);
+        keys.push(z);
+        kt = hook(spaceKey, 4000);
+        updateKeys();
+    }
+
+    function go(to) {
+        unhook(kt);
+        var url = host + to + "&tick=<!--in2_getrand()-->&" + ctrl;
+        var response = loadXMLDoc(url);
+        var rawKey = to.split("=")[1];
+        if (rawKey == "Star") rawKey = "*";
+        if (rawKey == "Pound") rawKey = "#";
+        document.getElementById('display').innerHTML = response.split("<!--s-->")[3];
+        keys.push(rawKey);
+        kt = hook(spaceKey, 4000);
+        updateKeys();
+        updateStatus();
+        unhook(dt);
+        dt = hook(updateDisplay, 500); 
+    }
+
+    function loadXMLDoc(dname) {
+        var xhttp;
+        console.log(dname);
+        if (window.XMLHttpRequest) xhttp = new XMLHttpRequest(); else xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        xhttp.open("GET",dname,false);
+        xhttp.send();
+        var rt = xhttp.responseText;
+        if (rt.indexOf(String.fromCharCode(80) + "assword") != -1) window.location.href = host;
+        return rt;
+    }
+    
+    function updateDisplay() {
+        var response = loadXMLDoc(host + "?" + ctrl);
+        document.getElementById('display').innerHTML = response.split("<!--s-->")[3];
+        updateStatus();
+        unhook(dt);
+        dt = hook(updateDisplay, 10000);     
+    }
+
+    function updateStatus() {
+        isOn('Ready'); isOn('Armed'); isOn('Bypass');
+    }
+
+    function isOn(light) {
+        var l = document.getElementById(light);
+        if (l.getAttribute("data-f").indexOf("1") != -1) l.innerHTML = light.toUpperCase();
+    }
+    
+    function updateKeys() {
+        if(keys.length > 9) keys.shift();
+
+        var keyChain = "";
+        for (var i = 0; i < keys.length; i++) {
+            if (keys[i].length == 1) keyChain += "&nbsp;";
+            keyChain += keys[i] + "&nbsp;";
+        }
+        keyChain += "<br />";
+        document.getElementById('keyPressed').innerHTML = keyChain;
+    }
+
+    function onBodyLoad() {
+            updateStatus();
+            dt = hook(updateDisplay, 10000); 
+            document.getElementById('nf').src = "http://services.in3myhome.com/in3.ashx?email=" + encodeURIComponent("<!--in2_getvar(key=variable.emailadd)-->");
+    }
+</script>
+</head>
+<body onload="onBodyLoad();">
+    <div id="main">
+        <center>
+        <div style="background-color:black;padding: 0px; margin:0px; height:116px; width:300px; border:none;">
+            <div id="display" style="background-color:black;color:white;">
+                <!--s-->        
+                <center>
+                    <br />
+                    <font face="Courier">
+                        <!--in2_getvar(key=variable.txt_1)--><br />
+                        <!--in2_getvar(key=variable.txt_2)--><!--in2_getvar(key=variable.txt_3)--><br /><br />
+                    </font>
+                </center>
+                <table cellpadding="5" cellspacing="5" width="99%">
+                    <tr>
+                        <td align="left">
+                            <font face="Courier" color="#7FFF00" id="Ready" data-f="<!--in2_getvar(key=variable.Ready)-->">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+                        </td>
+                        <td align="center">
+                            <font face="Courier" color="Yellow" id="Bypass" data-f="<!--in2_getvar(key=variable.Bypass)-->">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+                        </td>
+                        <td align="right">
+                            <font face="Courier" color="Red" id="Armed" data-f="<!--in2_getvar(key=variable.ArmStatus)--><!--in2_getvar(key=variable.ArmAway)--><!--in2_getvar(key=variable.ArmStay)--><!--in2_getvar(key=variable.ArmInstant)-->">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+                        </td>
+                    </tr>
+                </table>
+                <!--s-->  
+            </div>
+        </div>
+        <div id="keyPressed" style="color:White; font-family: Courier;">&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;&nbsp;.&nbsp;<br /></div>
+        </center>
+        <table align="center">
+            <tr>
+                <td>
+                    <table align="center" cellspacing="15">
+                        <tr><td class="button_3"><a class="button_3" href="javascript:go('?cmd=F1');"><!--in2_getvar(key=variable.button1)--></a></td></tr>
+                        <tr><td class="button_3"><a class="button_3" href="javascript:go('?cmd=F2');"><!--in2_getvar(key=variable.button2)--></a></td></tr>
+                        <tr><td class="button_3"><a class="button_3" href="javascript:go('?cmd=F3');"><!--in2_getvar(key=variable.button3)--></a></td></tr>
+                        <tr><td class="button_3"><a class="button_3" href="javascript:go('?cmd=F4');"><!--in2_getvar(key=variable.button4)--></a></td></tr>
+                    </table>
+                </td>
+                <td>
+                    <table align="center" cellspacing="15">
+                        <tr>
+                            <td class="button_1"><a class="button_1" href="javascript:go('?cmd=1');">&nbsp;1&nbsp;</a></td>
+                            <td class="button_1"><a class="button_1" href="javascript:go('?cmd=2');">&nbsp;2&nbsp;</a></td>
+                            <td class="button_1"><a class="button_1" href="javascript:go('?cmd=3');">&nbsp;3&nbsp;</a></td>
+                        </tr>
+                        <tr>
+                            <td class="button_1"><a class="button_1" href="javascript:go('?cmd=4');">&nbsp;4&nbsp;</a></td>
+                            <td class="button_1"><a class="button_1" href="javascript:go('?cmd=5');">&nbsp;5&nbsp;</a></td>
+                            <td class="button_1"><a class="button_1" href="javascript:go('?cmd=6');">&nbsp;6&nbsp;</a></td>
+                        </tr>
+                        <tr>
+                            <td class="button_1"><a class="button_1" href="javascript:go('?cmd=7');">&nbsp;7&nbsp;</a></td>
+                            <td class="button_1"><a class="button_1" href="javascript:go('?cmd=8');">&nbsp;8&nbsp;</a></td>
+                            <td class="button_1"><a class="button_1" href="javascript:go('?cmd=9');">&nbsp;9&nbsp;</a></td>
+                        </tr>
+                        <tr>
+                            <td class="button_1"><a class="button_1" href="javascript:go('?cmd=Star');">&nbsp;*&nbsp;</a></td>
+                            <td class="button_1"><a class="button_1" href="javascript:go('?cmd=0');">&nbsp;0&nbsp;</a></td>
+                            <td class="button_1"><a class="button_1" href="javascript:go('?cmd=Pound');">&nbsp;#&nbsp;</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <div style="background-color:white; width:100%;">
+            <table cellpadding="0" cellspacing="0" width="100%"><tr><td><img id="nf"/></td><td align="center" valign="middle">Vista ICM iOS mod 1.11</td></tr></table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<access xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <account number="7263f13c" type="ongoing" expires="2020-12-31T23:59:59Z" timezoneid="US/Pacific">
+    <holder>Device User</holder>
+    <email>deviceuser@example.com</email>
+    <password>HASH</password>
+    <devices>
+      <device type="icm" lastip="1.2.3.4" lastdate="2015-12-14T00:00:00Z" ipforwardkey="abcd" externetforwardpattern="http://$:61977/pda" internalforwardpattern="http://192.168.7.99:/pda" testmode="False" iosviewport="true">00:0e:70:00:3d:69</device>
+    </devices>
+  </account>
+</access>
